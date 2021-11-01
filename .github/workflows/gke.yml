@@ -19,10 +19,10 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: cluster-1    # TODO: update to cluster name
-  GKE_ZONE: us-central1-c   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  IMAGE: static-site
+  GKE_CLUSTER: hello-cluster   # TODO: update to cluster name
+  GKE_ZONE: us-central1-a   # TODO: update to cluster zone
+  DEPLOYMENT_NAME: helm-chart # TODO: update to deployment name
+  IMAGE: helm-chart
 
 jobs:
   setup-build-publish-deploy:
@@ -80,7 +80,8 @@ jobs:
           --zone=$GKE_ZONE \
           --project=$GKE_PROJECT
         helm upgrade $GKE_PROJECT $GKE_PROJECT-cluster/ \
-          --set gke-test.image.tag=$GITHUB_SHA \
+          --install \
+          --set helm-chart.image.tag=$GITHUB_SHA \
           --wait
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
