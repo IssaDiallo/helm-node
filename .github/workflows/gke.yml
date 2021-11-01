@@ -20,7 +20,7 @@ on:
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: hello-cluster   # TODO: update to cluster name
+  GKE_CLUSTER: issa-demo-cluster   # TODO: update to cluster name
   GKE_ZONE: us-central1-a   # TODO: update to cluster zone
   DEPLOYMENT_NAME: helm-chart # TODO: update to deployment name
   IMAGE: helm-chart
