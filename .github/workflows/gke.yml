@@ -19,6 +19,7 @@ on:
 
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: hello-cluster   # TODO: update to cluster name
   GKE_ZONE: us-central1-a   # TODO: update to cluster zone
   DEPLOYMENT_NAME: helm-chart # TODO: update to deployment name
@@ -74,8 +75,6 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |
-        gcloud config unset account
-        gcloud config set project $GKE_PROJECT
         gcloud container clusters get-credentials $GKE_CLUSTER \
           --zone=$GKE_ZONE \
           --project=$GKE_PROJECT
