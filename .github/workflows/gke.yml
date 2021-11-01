@@ -81,6 +81,7 @@ jobs:
         helm upgrade $GKE_PROJECT $DEPLOYMENT_NAME/ \
           --install \
           --set helm-chart.image.tag=$GITHUB_SHA \
+          --debug \
           --wait
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
