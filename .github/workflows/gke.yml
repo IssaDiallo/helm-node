@@ -79,7 +79,7 @@ jobs:
           --zone=$GKE_ZONE \
           --project=$GKE_PROJECT
         helm upgrade $GKE_PROJECT $DEPLOYMENT_NAME/ \
-          -f values-dev.yaml \
+          -f $DEPLOYMENT_NAME/values-dev.yaml \
           --install \
           --set image.tag=$GITHUB_SHA \
           --wait \
