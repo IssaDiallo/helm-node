@@ -14,7 +14,7 @@ fullnameOverride: ""
 
 service:
   type: LoadBalancer
-  exposePort: 3000
+  exposePort: 30000
   targetPort: 8080
   internalPort: 3000
 
