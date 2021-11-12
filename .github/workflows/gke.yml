@@ -39,8 +39,8 @@ jobs:
       uses: actions/checkout@v2
 
     - name: concatenate values to environment file
-        run: |
-          echo "joined=${{env.GKE_ZONE_ONE}}${{env.GKE_ZONE_ONE}}" >> $GKE_ZONE
+      run: |
+        echo "joined=${{env.GKE_ZONE_ONE}}${{env.GKE_ZONE_ONE}}" >> $GKE_ZONE
     - name: check environment variable is available
       run: |
         echo "${{ env.joined }}"
