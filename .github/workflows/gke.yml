@@ -61,7 +61,7 @@ jobs:
       with:
         cluster_name: ${{ env.GKE_CLUSTER }}
         # location: ${{ env.GKE_ZONE }}
-        location: ${{ env.GKE_ZONE_ONE }}, ${{ env.GKE_ZONE_TWO }}
+        location: [${{ env.GKE_ZONE_ONE }}, ${{ env.GKE_ZONE_TWO }}]
         credentials: ${{ secrets.GKE_SA_KEY }}
 
     # Build the Docker image
