@@ -40,7 +40,7 @@ jobs:
 
     - name: concatenate values to environment file
       run: |
-        echo "joined=${{env.GKE_ZONE_ONE}} ${{env.GKE_ZONE_ONE}}" >> $GKE_ZONE
+        echo "joined=${{env.GKE_ZONE_ONE}} ${{env.GKE_ZONE_TWO}}" >> $GKE_ZONE
     - name: check environment variable is available
       run: |
         echo "${{ env.joined }}"
