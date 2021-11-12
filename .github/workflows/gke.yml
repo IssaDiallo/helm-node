@@ -21,8 +21,8 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: hello-cluster   # TODO: update to cluster name
-  GKE_ZONE: us-central1-a/us-central1-b   # TODO: update to cluster zone
-  #GKE_REGION: us-central1   # TODO: update to cluster zone
+  #GKE_ZONE: us-central1-a/us-central1-b   # TODO: update to cluster zone
+  GKE_REGION: us-central1   # TODO: update to cluster zone
   DEPLOYMENT_NAME: helm-chart # TODO: update to deployment name
   IMAGE: helm-chart
 
@@ -51,8 +51,8 @@ jobs:
     - uses: google-github-actions/get-gke-credentials@v0.2.1
       with:
         cluster_name: ${{ env.GKE_CLUSTER }}
-        location: ${{ env.GKE_ZONE }}
-        # location: ${{ env.REGION }}
+        #location: ${{ env.GKE_ZONE }}
+        location: us-central1-a, us-central1-b 
         credentials: ${{ secrets.GKE_SA_KEY }}
 
     # Build the Docker image
@@ -78,8 +78,8 @@ jobs:
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER \
-          --zone=$GKE_ZONE \
-          # --zone=$GKE_REGION \
+          # --zone=$GKE_ZONE \
+          --zone=$GKE_REGION \
           --project=$GKE_PROJECT
         helm upgrade $GKE_PROJECT $DEPLOYMENT_NAME/ \
           -f $DEPLOYMENT_NAME/values-dev.yaml \
