@@ -40,10 +40,10 @@ jobs:
 
     - name: concatenate values to environment file
       run: |
-        echo "joined=${{env.GKE_ZONE_ONE}} ${{env.GKE_ZONE_TWO}}" >> $GKE_ZONE
+        echo "GKE_ZONE=${{env.GKE_ZONE_ONE}} ${{env.GKE_ZONE_TWO}}" >> $GITHUB_ENV
     - name: check environment variable is available
       run: |
-        echo "${{ env.joined }}"
+        echo "${{ env.GKE_ZONE }}"
 
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
