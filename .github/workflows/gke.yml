@@ -58,7 +58,7 @@ jobs:
 
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
-        gcloud container cluster get-credentials "$GKE_CLUSTER" --region "$GKE_REGION"
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --region "$GKE_REGION"
     # - uses: google-github-actions/get-gke-credentials@v0.2.1
     #   with:
     #     cluster_name: ${{ env.GKE_CLUSTER }}
