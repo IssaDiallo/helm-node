@@ -21,7 +21,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: hello-cluster   # TODO: update to cluster name
-  #GKE_ZONE: us-central1-a/us-central1-b   # TODO: update to cluster zone
+  GKE_ZONE: us-central1-a   # TODO: update to cluster zone
   # GKE_ZONE_ONE: us-central1-a
   # GKE_ZONE_TWO: us-central1-b
   GKE_REGION: us-central1   # TODO: update to cluster zone
@@ -58,7 +58,7 @@ jobs:
 
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --region "$GKE_REGION"
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
     # - uses: google-github-actions/get-gke-credentials@v0.2.1
     #   with:
     #     cluster_name: ${{ env.GKE_CLUSTER }}
@@ -89,8 +89,8 @@ jobs:
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER \
-          # --zone=$GKE_ZONE \
-          --region=$GKE_REGION \
+           --zone=$GKE_ZONE \
+          # --region=$GKE_REGION \
           --project=$GKE_PROJECT
         helm upgrade $GKE_PROJECT $DEPLOYMENT_NAME/ \
           -f $DEPLOYMENT_NAME/values-dev.yaml \
