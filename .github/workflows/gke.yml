@@ -22,9 +22,9 @@ env:
   GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: hello-cluster   # TODO: update to cluster name
   #GKE_ZONE: us-central1-a/us-central1-b   # TODO: update to cluster zone
-  GKE_ZONE_ONE: us-central1-a
-  GKE_ZONE_TWO: us-central1-b
-  # GKE_REGION: us-central1   # TODO: update to cluster zone
+  # GKE_ZONE_ONE: us-central1-a
+  # GKE_ZONE_TWO: us-central1-b
+  GKE_REGION: us-central1   # TODO: update to cluster zone
   DEPLOYMENT_NAME: helm-chart # TODO: update to deployment name
   IMAGE: helm-chart
 
@@ -38,12 +38,12 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: concatenate values to environment file
-      run: |
-        echo "GKE_ZONE=${{env.GKE_ZONE_ONE}} ${{env.GKE_ZONE_TWO}}" >> $GITHUB_ENV
-    - name: check environment variable is available
-      run: |
-        echo "${{ env.GKE_ZONE }}"
+    # - name: concatenate values to environment file
+    #   run: |
+    #     echo "GKE_ZONE=${{env.GKE_ZONE_ONE}} ${{env.GKE_ZONE_TWO}}" >> $GITHUB_ENV
+    # - name: check environment variable is available
+    #   run: |
+    #     echo "${{ env.GKE_ZONE }}"
 
     # Setup gcloud CLI
     - uses: google-github-actions/setup-gcloud@v0.2.0
@@ -57,12 +57,14 @@ jobs:
         gcloud --quiet auth configure-docker
 
     # Get the GKE credentials so we can deploy to the cluster
-    - uses: google-github-actions/get-gke-credentials@v0.2.1
-      with:
-        cluster_name: ${{ env.GKE_CLUSTER }}
-        # location: ${{ env.GKE_ZONE }}
-        location: [${{ env.GKE_ZONE_ONE }}, ${{ env.GKE_ZONE_TWO }}]
-        credentials: ${{ secrets.GKE_SA_KEY }}
+    - run: |-
+        gcloud container cluster get-credentials "$GKE_CLUSTER" --region "$GKE_REGION"
+    # - uses: google-github-actions/get-gke-credentials@v0.2.1
+    #   with:
+    #     cluster_name: ${{ env.GKE_CLUSTER }}
+    #     # location: ${{ env.GKE_ZONE }}
+    #     location: [${{ env.GKE_ZONE_ONE }}, ${{ env.GKE_ZONE_TWO }}]
+    #     credentials: ${{ secrets.GKE_SA_KEY }}
 
     # Build the Docker image
     - name: Build
@@ -88,7 +90,7 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER \
           # --zone=$GKE_ZONE \
-          --zone=$GKE_REGION \
+          --region=$GKE_REGION \
           --project=$GKE_PROJECT
         helm upgrade $GKE_PROJECT $DEPLOYMENT_NAME/ \
           -f $DEPLOYMENT_NAME/values-dev.yaml \
