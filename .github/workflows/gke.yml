@@ -90,8 +90,7 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER \
            --zone=$GKE_ZONE \
-          # --region=$GKE_REGION \
-          --project=$GKE_PROJECT
+           --project=$GKE_PROJECT
         helm upgrade $GKE_PROJECT $DEPLOYMENT_NAME/ \
           -f $DEPLOYMENT_NAME/values-dev.yaml \
           --install \
