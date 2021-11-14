@@ -97,5 +97,5 @@ jobs:
           --set image.tag=$GITHUB_SHA \
           --wait \
           --namespace example-helm
-        kubectl rollout status deployment/$GKE_PROJECT-$DEPLOYMENT_NAME
+        kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
