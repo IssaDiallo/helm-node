@@ -95,7 +95,8 @@ jobs:
           --install \
           --set image.tag=$GITHUB_SHA \
           --wait \
-          --namespace example-helm
+          --namespace example-helm \
+          --debug
           # -f $DEPLOYMENT_NAME/values-dev.yaml \
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
