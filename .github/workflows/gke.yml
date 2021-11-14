@@ -102,7 +102,7 @@ jobs:
         kubectl get services -o wide
 
   dev-setup-build-publish-deploy:
-    name: Setup, Build, Publish, and Deploy
+    name: DEV - Setup, Build, Publish, and Deploy
     runs-on: ubuntu-latest
     environment: development
 
@@ -152,7 +152,7 @@ jobs:
            --project=$GKE_PROJECT
         helm upgrade $DEV_DEPLOYMENT_NAME helm-chart/ \
           --install \
-          --set image.tag=$GITHUB_SHA \
+          --set dev-helm-chart.image.tag=$GITHUB_SHA \
           --wait \
           --value helm-chart/values-dev.yaml \
           --namespace example-helm \
