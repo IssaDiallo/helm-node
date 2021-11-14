@@ -92,10 +92,10 @@ jobs:
            --zone=$GKE_ZONE \
            --project=$GKE_PROJECT
         helm upgrade $DEPLOYMENT_NAME $DEPLOYMENT_NAME/ \
-          # -f $DEPLOYMENT_NAME/values-dev.yaml \
           --install \
           --set image.tag=$GITHUB_SHA \
           --wait \
           --namespace example-helm
+          # -f $DEPLOYMENT_NAME/values-dev.yaml \
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
