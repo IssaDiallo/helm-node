@@ -152,7 +152,7 @@ jobs:
            --project=$GKE_PROJECT
         helm upgrade $DEV_DEPLOYMENT_NAME helm-chart/ \
           --install \
-          --set dev-helm-chart.image.tag=$GITHUB_SHA \
+          --set image.tag=$GITHUB_SHA \
           --wait \
           --values helm-chart/values-dev.yaml \
           --namespace example-helm \
