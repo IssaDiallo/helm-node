@@ -97,6 +97,5 @@ jobs:
           --wait \
           --namespace example-helm \
           --debug
-          # -f $DEPLOYMENT_NAME/values-dev.yaml \
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
