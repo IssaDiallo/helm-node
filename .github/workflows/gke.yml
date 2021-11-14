@@ -154,7 +154,7 @@ jobs:
           --install \
           --set dev-helm-chart.image.tag=$GITHUB_SHA \
           --wait \
-          --value helm-chart/values-dev.yaml \
+          --values helm-chart/values-dev.yaml \
           --namespace example-helm \
           --debug 
         kubectl rollout status deployment/$DEV_DEPLOYMENT_NAME
