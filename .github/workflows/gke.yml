@@ -91,7 +91,7 @@ jobs:
         gcloud container clusters get-credentials $GKE_CLUSTER \
            --zone=$GKE_ZONE \
            --project=$GKE_PROJECT
-        helm upgrade $GKE_PROJECT $DEPLOYMENT_NAME/ \
+        helm upgrade $DEPLOYMENT_NAME $DEPLOYMENT_NAME/ \
           -f $DEPLOYMENT_NAME/values-dev.yaml \
           --install \
           --set image.tag=$GITHUB_SHA \
