@@ -156,6 +156,7 @@ jobs:
           --wait \
           --values helm-chart/values-dev.yaml \
           --namespace example-helm \
-          --debug 
+          --debug \
+          --atomic
         kubectl rollout status deployment/$DEV_DEPLOYMENT_NAME
-        kubectl get services -o wide
+        kubectl get services -o wide -n example-helm
