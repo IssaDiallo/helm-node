@@ -143,6 +143,11 @@ jobs:
     - name: Install Helm
       run: |
         curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+    
+    # Test kubectl
+    - name: Test
+      run: |
+        kubectl get events
         
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
