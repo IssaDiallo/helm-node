@@ -211,16 +211,16 @@ jobs:
       run: |
         curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
     
-    # Test kubectl
-    - name: Test
-      run: |
-        kubectl get events
-        kubectl create secret docker-registry gcr-json-key \
-            --docker-server=gcr.io \
-            --docker-username=idiallo \
-            --docker-password=${{ secrets.GKE_SA_KEY }} \
-            --docker-email=idiallo.spsu@gmail.com \
-            --namespace localdev
+    # # Test kubectl
+    # - name: Test
+    #   run: |
+    #     kubectl get events
+    #     kubectl create secret docker-registry gcr-json-key \
+    #         --docker-server=gcr.io \
+    #         --docker-username=idiallo \
+    #         --docker-password=${{ secrets.GKE_SA_KEY }} \
+    #         --docker-email=idiallo.spsu@gmail.com \
+    #         --namespace localdev
         
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
