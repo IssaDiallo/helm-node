@@ -1,6 +1,7 @@
 'use strict';
 
-const express = require('../projects/kwx/kh-hello-world-svc/node_modules/express');
+// const express = require('../projects/kwx/kh-hello-world-svc/node_modules/express');
+const express = require('express');
 
 // Constants
 const PORT = 8080;

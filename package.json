@@ -1,17 +1,23 @@
 {
-  "name": "node-js-sample",
+  "name": "helm-node",
   "version": "1.0.0",
-  "description": "A sample Node.js app",
+  "description": "You can go through my medium article for more details - [Nodejs on kubernetes](https://medium.com/@cloudegl/run-node-js-app-using-kubernetes-helm-bb87747785a)",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IssaDiallo/helm-node.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IssaDiallo/helm-node/issues"
+  },
+  "homepage": "https://github.com/IssaDiallo/helm-node#readme",
   "dependencies": {
-    "express": "^4.13.3"
-  },
-  "engines": {
-    "node": "8.0.0"
-  },
-  "author": "Pankaj Sharma",
-  "license": "MIT"
+    "express": "^4.17.1"
+  }
 }
