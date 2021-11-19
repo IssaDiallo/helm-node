@@ -9,8 +9,8 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-imagePullSecrets:
-  - name: gcr-creds
+# imagePullSecrets:
+#   - name: gcr-creds
 
 nameOverride: ""
 fullnameOverride: ""
