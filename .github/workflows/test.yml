@@ -9,7 +9,7 @@ jobs:
   testsecrets:
     name: Test Secrets
     runs-on: ubuntu-latest
-
+    steps:
     - run: |-
         echo ${{secrets.GKE_PROJECT}} | base64
 
