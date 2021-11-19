@@ -12,8 +12,6 @@ jobs:
     steps:
     - run: |-
         echo ${{secrets.GKE_PROJECT}} | base64
-        # echo ${{secrets.GKE_SA_KEY}}
-        # echo hello
 
 # jobs:
 #   testsecret:
