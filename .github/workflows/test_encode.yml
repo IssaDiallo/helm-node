@@ -1,6 +1,9 @@
 name: TEST ENCODE base64
 
-on: [push]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   testsecret:
