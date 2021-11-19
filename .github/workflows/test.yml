@@ -1,4 +1,4 @@
-name: TEST ENCODE base64
+name: Test
 
 on:
   push:
