@@ -103,70 +103,70 @@ jobs:
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
 
-  # dev-setup-build-publish-deploy:
-  #   name: DEV - Setup, Build, Publish, and Deploy
-  #   runs-on: ubuntu-latest
-  #   environment: development
+  dev-setup-build-publish-deploy:
+    name: DEV - Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: development
 
-  #   steps:
-  #   - name: Checkout
-  #     uses: actions/checkout@v2
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
 
-  #   # Setup gcloud CLI
-  #   - uses: google-github-actions/setup-gcloud@v0.2.0
-  #     with:
-  #       service_account_key: ${{ secrets.GKE_SA_KEY }}
-  #       project_id: ${{ secrets.GKE_PROJECT }}
+    # Setup gcloud CLI
+    - uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT }}
 
-  #   # Configure Docker to use the gcloud command-line tool as a credential
-  #   # helper for authentication
-  #   - run: |-
-  #       gcloud --quiet auth configure-docker
+    # Configure Docker to use the gcloud command-line tool as a credential
+    # helper for authentication
+    - run: |-
+        gcloud --quiet auth configure-docker
 
-  #   # Get the GKE credentials so we can deploy to the cluster
-  #   - run: |-
-  #       gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
+    # Get the GKE credentials so we can deploy to the cluster
+    - run: |-
+        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
 
-  #   # Build the Docker image
-  #   - name: Build
-  #     run: |-
-  #       docker build \
-  #         --tag "gcr.io/$PROJECT_ID/$DEV_IMAGE:$GITHUB_SHA" \
-  #         --build-arg GITHUB_SHA="$GITHUB_SHA" \
-  #         --build-arg GITHUB_REF="$GITHUB_REF" \
-  #         .
+    # Build the Docker image
+    - name: Build
+      run: |-
+        docker build \
+          --tag "gcr.io/$PROJECT_ID/$DEV_IMAGE:$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          .
 
-  #   # Push the Docker image to Google Container Registry
-  #   - name: Publish
-  #     run: |-
-  #       docker push "gcr.io/$PROJECT_ID/$DEV_IMAGE:$GITHUB_SHA"
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |-
+        docker push "gcr.io/$PROJECT_ID/$DEV_IMAGE:$GITHUB_SHA"
 
-  #   # Install helm
-  #   - name: Install Helm
-  #     run: |
-  #       curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+    # Install helm
+    - name: Install Helm
+      run: |
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
     
-  #   # Test kubectl
-  #   - name: Test
-  #     run: |
-  #       kubectl get events
+    # Test kubectl
+    - name: Test
+      run: |
+        kubectl get events
         
-  #   # Deploy the Docker image to the GKE cluster
-  #   - name: Deploy
-  #     run: |
-  #       gcloud container clusters get-credentials $GKE_CLUSTER \
-  #          --zone=$GKE_ZONE \
-  #          --project=$GKE_PROJECT
-  #       helm upgrade $DEV_DEPLOYMENT_NAME helm-chart/ \
-  #         --install \
-  #         --set image.tag=$GITHUB_SHA \
-  #         --wait \
-  #         --values helm-chart/values-dev.yaml \
-  #         --namespace example-helm \
-  #         --debug \
-  #         --atomic
-  #       kubectl rollout status deployment/$DEV_DEPLOYMENT_NAME
-  #       kubectl get services -o wide -n example-helm
+    # Deploy the Docker image to the GKE cluster
+    - name: Deploy
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER \
+           --zone=$GKE_ZONE \
+           --project=$GKE_PROJECT
+        helm upgrade $DEV_DEPLOYMENT_NAME helm-chart/ \
+          --install \
+          --set image.tag=$GITHUB_SHA \
+          --wait \
+          --values helm-chart/values-dev.yaml \
+          --namespace example-helm \
+          --debug \
+          --atomic
+        kubectl rollout status deployment/$DEV_DEPLOYMENT_NAME
+        kubectl get services -o wide -n example-helm
 
   # localdev-setup-build-publish-deploy:
   #   name: DEV - Setup, Build, Publish, and Deploy
