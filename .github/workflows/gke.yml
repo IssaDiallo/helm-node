@@ -165,7 +165,7 @@ jobs:
           --namespace example-helm \
           --debug \
           --atomic
-        kubectl rollout status deployment/$DEV_DEPLOYMENT_NAME
+        kubectl rollout status deployment/$DEV_DEPLOYMENT_NAME -n example-helm
         kubectl get services -o wide -n example-helm
 
   # localdev-setup-build-publish-deploy:
@@ -236,5 +236,5 @@ jobs:
   #         --namespace localdev \
   #         --debug \
   #         --atomic
-  #       kubectl rollout status deployment/$LOCALDEV_DEPLOYMENT_NAME
+  #       kubectl rollout status deployment/$LOCALDEV_DEPLOYMENT_NAME -n localdev
   #       kubectl get services -o wide -n localdev
