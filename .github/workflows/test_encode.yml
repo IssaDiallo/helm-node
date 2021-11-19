@@ -1,6 +1,6 @@
 name: TEST ENCODE base64
 
-on: push
+on: [push]
 
 jobs:
   testsecret:
