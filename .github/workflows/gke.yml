@@ -33,6 +33,7 @@ env:
   DEV_IMAGE: dev-helm-chart
   LOCALDEV_DEPLOYMENT_NAME: localdev-helm-chart # TODO: update to deployment name
   LOCALDEV_IMAGE: localdev-helm-chart
+  SA_EMAIL: ${{ secrets.SA_EMAIL}}
 
 jobs:
   setup-build-publish-deploy:
@@ -95,6 +96,7 @@ jobs:
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
+        gcloud auth activate-service-account $SA_EMAIL --key-file=${{secrets.GKE_SA_KEY_GCR}}
         # docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
         docker push "gcr.io/$GKE_PROJECT_GCR/$IMAGE:$GITHUB_SHA"
 
