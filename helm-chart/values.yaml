@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: gcr.io/issa-project1/helm-chart
+  repository: gcr.io/issa-project2/helm-chart
   tag: latest
   pullPolicy: IfNotPresent
 
