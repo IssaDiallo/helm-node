@@ -218,7 +218,7 @@ jobs:
         kubectl create secret docker-registry gcr-json-key \
             --docker-server=gcr.io \
             --docker-username=idiallo \
-            --docker-password=${{ secrets.GKE_PROJECT }} \
+            --docker-password=${{ secrets.GKE_SA_KEY }} \
             --docker-email=idiallo.spsu@gmail.com \
             --namespace localdev
         
