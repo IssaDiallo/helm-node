@@ -1,0 +1,15 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  testsecret:
+    runs-on: ubuntu-latest
+    steps:
+    - run: |-
+        echo ${{secrets.GKE_PROJECT}} | base64
+        echo ${{secrets.GKE_SA_KEY}}
+        echo hello
