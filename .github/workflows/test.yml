@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |-
-        echo ${{ secrets.GKE_SA_KEY }} | base64
+        echo ${{ secrets.GKE_PROJECT }} | base64
 # jobs:
 #   testsecret:
 #     runs-on: ubuntu-latest
