@@ -123,15 +123,19 @@ jobs:
     #     service_account_key: ${{ secrets.GKE_SA_KEY }}
     #     project_id: ${{ secrets.GKE_PROJECT }}
         
-      run: |-
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"    
+      # run: |-
+      #   gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"    
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT }}
+
       run: |
-        gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
-        # gcloud container clusters get-credentials $GKE_CLUSTER \
-        #    --zone=$GKE_ZONE \
-        #    --project=$GKE_PROJECT
+        gcloud container clusters get-credentials $GKE_CLUSTER \
+           --zone=$GKE_ZONE \
+           --project=$GKE_PROJECT
         helm upgrade $DEPLOYMENT_NAME $DEPLOYMENT_NAME/ \
           --install \
           --set image.tag=$GITHUB_SHA \
