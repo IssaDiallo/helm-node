@@ -116,17 +116,22 @@ jobs:
       run: |
         curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-    # Setup gcloud CLI
-    - name: Setup gcloud
-      uses: google-github-actions/setup-gcloud@v0.2.0
-      with:
-        service_account_key: ${{ secrets.GKE_SA_KEY }}
-        project_id: ${{ secrets.GKE_PROJECT }}
+    # # Setup gcloud CLI
+    # - name: Setup gcloud
+    #   uses: google-github-actions/setup-gcloud@v0.2.0
+    #   with:
+    #     service_account_key: ${{ secrets.GKE_SA_KEY }}
+    #     project_id: ${{ secrets.GKE_PROJECT }}
         
       run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"    
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
+      uses: google-github-actions/setup-gcloud@v0.2.0
+      with:
+        service_account_key: ${{ secrets.GKE_SA_KEY }}
+        project_id: ${{ secrets.GKE_PROJECT }}
+        
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER \
            --zone=$GKE_ZONE \
