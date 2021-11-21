@@ -122,15 +122,16 @@ jobs:
       run: |
         curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-    run: |
-      gcloud container clusters get-credentials $GKE_CLUSTER \
-          --zone=$GKE_ZONE \
-          --project=$GKE_PROJECT
-      helm upgrade $DEPLOYMENT_NAME $DEPLOYMENT_NAME/ \
-        --install \
-        --set image.tag=$GITHUB_SHA \
-        --wait \
-        --debug
+    - name: Deploy
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER \
+            --zone=$GKE_ZONE \
+            --project=$GKE_PROJECT
+        helm upgrade $DEPLOYMENT_NAME $DEPLOYMENT_NAME/ \
+          --install \
+          --set image.tag=$GITHUB_SHA \
+          --wait \
+          --debug
 
-      kubectl rollout status deployment/$DEPLOYMENT_NAME
-      kubectl get services -o wide
+        kubectl rollout status deployment/$DEPLOYMENT_NAME
+        kubectl get services -o wide
