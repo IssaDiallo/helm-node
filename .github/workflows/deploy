@@ -1,0 +1,30 @@
+name: Build and Deploy to GKE
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+env:
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT }}
+  GKE_PROJECT_GCR: ${{ secrets.GKE_PROJECT_GCR }}
+  GKE_CLUSTER: hello-cluster   # TODO: update to cluster name
+  GKE_ZONE: us-central1-a   # TODO: update to cluster zone
+  # GKE_ZONE_ONE: us-central1-a
+  # GKE_ZONE_TWO: us-central1-b
+  GKE_REGION: us-central1   # TODO: update to cluster zone
+  DEPLOYMENT_NAME: helm-chart # TODO: update to deployment name
+  IMAGE: helm-chart
+  DEV_DEPLOYMENT_NAME: dev-helm-chart # TODO: update to deployment name
+  DEV_IMAGE: dev-helm-chart
+  LOCALDEV_DEPLOYMENT_NAME: localdev-helm-chart # TODO: update to deployment name
+  LOCALDEV_IMAGE: localdev-helm-chart
+  SA_EMAIL: ${{ secrets.SA_EMAIL}}
+
+jobs:
+  setup-build-publish-deploy:
+    name: Setup, Build, Publish, and Deploy
+    runs-on: ubuntu-latest
+    environment: production
