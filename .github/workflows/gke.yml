@@ -112,25 +112,25 @@ jobs:
     # - name: Checkout
     #   uses: actions/checkout@v2
 
-      uses: google-github-actions/setup-gcloud@v0.2.0
+    - uses: google-github-actions/setup-gcloud@v0.2.0
       with:
         service_account_key: ${{ secrets.GKE_SA_KEY }}
         project_id: ${{ secrets.GKE_PROJECT }}
 
-      # Install helm
-      - name: Install Helm
-        run: |
-          curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-
+    # Install helm
+    - name: Install Helm
       run: |
-        gcloud container clusters get-credentials $GKE_CLUSTER \
-           --zone=$GKE_ZONE \
-           --project=$GKE_PROJECT
-        helm upgrade $DEPLOYMENT_NAME $DEPLOYMENT_NAME/ \
-          --install \
-          --set image.tag=$GITHUB_SHA \
-          --wait \
-          --debug
+        curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
-        kubectl rollout status deployment/$DEPLOYMENT_NAME
-        kubectl get services -o wide
+    run: |
+      gcloud container clusters get-credentials $GKE_CLUSTER \
+          --zone=$GKE_ZONE \
+          --project=$GKE_PROJECT
+      helm upgrade $DEPLOYMENT_NAME $DEPLOYMENT_NAME/ \
+        --install \
+        --set image.tag=$GITHUB_SHA \
+        --wait \
+        --debug
+
+      kubectl rollout status deployment/$DEPLOYMENT_NAME
+      kubectl get services -o wide
