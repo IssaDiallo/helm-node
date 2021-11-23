@@ -7,6 +7,7 @@ on:
 
 env:
   GKE_SA_KEY: ${{ secrets.GKE_SA_KEY }}
+  GKE_PROJECT: ${{ secrets.GKE_PROJECT}}
 
 jobs:
   testsecrets:
@@ -15,7 +16,8 @@ jobs:
     steps:
     - run: |-
         echo ${{ secrets.GKE_PROJECT }} | base64
-        echo $GKE_SA_KEY | base64
+        echo $GKE_PROJECT
+        #echo $GKE_SA_KEY | base64
 # jobs:
 #   testsecret:
 #     runs-on: ubuntu-latest
