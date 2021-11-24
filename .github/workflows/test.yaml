@@ -17,6 +17,7 @@ jobs:
     - run: |-
         echo ${{ secrets.GKE_PROJECT }} | base64
         echo $GKE_PROJECT
+        node version
         #echo $GKE_SA_KEY | base64
 # jobs:
 #   testsecret:
