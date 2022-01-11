@@ -16,7 +16,7 @@ jobs:
     steps:
     - run: |-
         echo ${{{ secrets.GKE_PROJECT }} | base64
-        echo $GKE_PROJECTs
+        echo $GKE_PROJECT
         npm version
         #echo $GKE_SA_KEY | base64
 # jobs:
