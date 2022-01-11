@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - run: |-
-        echo ${{ secrets.GKE_PROJECT }} | base64
+        echo ${{{ secrets.GKE_PROJECT }} | base64
         echo $GKE_PROJECT
         npm version
         #echo $GKE_SA_KEY | base64
