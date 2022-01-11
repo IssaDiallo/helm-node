@@ -16,6 +16,7 @@ jobs:
     steps:
     - run: |-
         echo "Hello World!!"
+        echo "Hello Again!"
         echo ${{ secrets.GKE_PROJECT }} | base64
         echo $GKE_PROJECT
         npm version
