@@ -1,6 +1,6 @@
-[![Actions Status](https://github.com/IssaDiallo/helm-node/workflows/Test/badge.svg)](https://github.com/IssaDiallo/helm-node/actions)
+######[![Actions Status](https://github.com/IssaDiallo/helm-node/workflows/Test/badge.svg)](https://github.com/IssaDiallo/helm-node/actions)
 
-#[![Actions Status](https://github.com/{user}/{repo}/workflows/{action}/badge.svg)](https://github.com/{user}/{repo}/actions)
+######[![Actions Status](https://github.com/{user}/{repo}/workflows/{action}/badge.svg)](https://github.com/{user}/{repo}/actions)
 
 #nodejs-sample app + dockerfile + helmchart
 
